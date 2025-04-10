@@ -13,7 +13,8 @@ import {
   FileText,
   Share2
 } from 'lucide-react'
-
+import YoutubeVideoForm from './YoutubeVideoForm'
+import AnalyzeButton from './AnalyzeButton'
 const HeroSection = () => {
     const features = [
         {
@@ -125,16 +126,8 @@ const HeroSection = () => {
 
                     {/* youtube video form */}
                     <div className='flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 w-full max-w-2xl'>
-                        <input 
-                            type='text' 
-                            placeholder='Enter your YouTube video URL' 
-                            className='w-full px-4 py-3 rounded-lg glass-effect focus:outline-none focus:ring-2 focus:ring-blue-400 text-white placeholder-gray-400'
-                        />
-
-                        <button className='bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-all flex items-center gap-2 whitespace-nowrap'>
-                            Summarize
-                            <ChevronRight size={18} />
-                        </button>
+                     <YoutubeVideoForm />
+                     <AnalyzeButton />
                     </div>
                 </div>
             </section>
@@ -151,7 +144,6 @@ const HeroSection = () => {
                 </div>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto'>
-                     
                     {features.map((feature) => (
                         <div
                             key={feature.title}
@@ -168,7 +160,6 @@ const HeroSection = () => {
                             </p>
                         </div>
                     ))}
-
                 </div>
             </section>
 
@@ -176,7 +167,6 @@ const HeroSection = () => {
             <section className='w-full flex flex-col items-center justify-center px-4 py-16 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden'>
                 {/* Background glow effect */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full filter blur-[120px]"></div>
-                
                 <div className='flex flex-col items-center justify-center gap-8 mb-12 z-10'>
                     <h2 className='text-4xl font-bold text-white'>
                         How It Works
@@ -185,7 +175,6 @@ const HeroSection = () => {
                         Get started with our YouTube summarizer in just a few simple steps
                     </p>
                 </div>
-
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto z-10'>
                     {steps.map((step) => (
                         <div
@@ -209,7 +198,6 @@ const HeroSection = () => {
                         </div>
                     ))}
                 </div>
-                
                 <div className='mt-12 z-10'>
                     <button className='bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-lg hover:opacity-90 transition-all flex items-center gap-2 text-lg font-medium'>
                         Get Started Now
@@ -217,7 +205,6 @@ const HeroSection = () => {
                     </button>
                 </div>
             </section>
-
         </div>
     )
 }
