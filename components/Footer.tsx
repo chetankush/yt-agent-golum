@@ -4,57 +4,65 @@ import YouTube3DIcon from './YouTube3DIcon'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
-  
+
   return (
-    <footer className='w-full bg-black py-12 text-gray-300 dark'>
-      <div className='max-w-7xl mx-auto px-4'>
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
+    <footer className='w-full bg-black py-16 text-gray-300 border-t border-white/5'>
+
+
+      <div className='max-w-7xl mx-auto px-6'>
+
+        <div className='flex justify-between'>
           {/* Brand */}
-          <div className='flex flex-col gap-4'>
-            <div className='flex items-center gap-3'>
-              <YouTube3DIcon size="small" />
-              <h3 className='text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text'>
-                YouTube-Summarizer
+          <div className='col-span-2 md:col-span-1 flex flex-col gap-4 '>
+            <div className='flex items-center gap-2'>
+              <div className="flex -ml-8">
+                <YouTube3DIcon size="small"  />
+              </div>
+              <h3 className='text-lg font-medium text-white tracking-tight'>
+                ProductReviewAI
               </h3>
             </div>
-            <p className='text-gray-400'>
-              AI-powered YouTube video summarization that saves you time and helps you extract key insights from any video content.
+            <p className='text-gray-400 text-sm w-full max-w-xl'>
+              AI-powered research assistant that summarizes YouTube reviews and compares products across platforms.
             </p>
           </div>
-          
-          {/* Quick Links */}
-          <div>
-            <h3 className='text-white text-lg font-semibold mb-4'>Quick Links</h3>
-            <ul className='flex flex-col gap-2'>
-              <li><Link href="/" className='text-gray-400 hover:text-blue-400 transition-colors'>Home</Link></li>
-              <li><Link href="/features" className='text-gray-400 hover:text-blue-400 transition-colors'>Features</Link></li>
-              <li><Link href="/pricing" className='text-gray-400 hover:text-blue-400 transition-colors'>Pricing</Link></li>
-              <li><Link href="/faq" className='text-gray-400 hover:text-blue-400 transition-colors'>FAQ</Link></li>
-            </ul>
-          </div>
-          
-          {/* Legal */}
-          <div>
-            <h3 className='text-white text-lg font-semibold mb-4'>Legal</h3>
-            <ul className='flex flex-col gap-2'>
-              <li><Link href="/terms" className='text-gray-400 hover:text-blue-400 transition-colors'>Terms of Service</Link></li>
-              <li><Link href="/privacy" className='text-gray-400 hover:text-blue-400 transition-colors'>Privacy Policy</Link></li>
-              <li><Link href="/cookies" className='text-gray-400 hover:text-blue-400 transition-colors'>Cookie Policy</Link></li>
-            </ul>
-          </div>
-          
-          {/* Contact */}
-          <div>
-            <h3 className='text-white text-lg font-semibold mb-4'>Contact</h3>
-            <ul className='flex flex-col gap-2'>
-              <li className='text-gray-400'>Email: <a href="mailto:contact@yt-summarizer.com" className='hover:text-blue-400 transition-colors'>contact@yt-summarizer.com</a></li>
-              <li className='text-gray-400'>Twitter: <a href="https://twitter.com/ytsummarizer" target="_blank" rel="noopener noreferrer" className='hover:text-blue-400 transition-colors'>@ytsummarizer</a></li>
-            </ul>
+
+          <div className='flex justify-around'>
+
+
+
+            {/* Product */}
+            <div className='flex flex-col gap-4 mr-20'>
+              <h3 className='text-white text-sm font-medium tracking-tight'>Product</h3>
+              <ul className='space-y-2.5'>
+                <li><Link href="/pricing" className='text-gray-400 hover:text-white transition-colors text-sm'>Pricing</Link></li>
+                <li><Link href="/how-it-works" className='text-gray-400 hover:text-white transition-colors text-sm'>How It Works</Link></li>
+                <li><Link href="/blog" className='text-gray-400 hover:text-white transition-colors text-sm'>Blog</Link></li>
+                <li><Link href="/faq" className='text-gray-400 hover:text-white transition-colors text-sm'>FAQ</Link></li>
+              </ul>
+            </div>
+
+
+
+            {/* Legal */}
+            <div className='' >
+              <h3 className='text-white text-sm font-medium mb-4 tracking-tight'>Legal</h3>
+              <ul className='space-y-2.5'>
+                <li><Link href="/terms" className='text-gray-400 hover:text-white transition-colors text-sm'>Terms of Service</Link></li>
+                <li><Link href="/privacy" className='text-gray-400 hover:text-white transition-colors text-sm'>Privacy Policy</Link></li>
+                <li><a href="mailto:hello@productreviewai.com" className='text-gray-400 hover:text-white transition-colors text-sm'>Contact Us</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-        
-        <div className='mt-12 pt-6 border-t border-gray-800 text-center text-gray-500'>
-          <p>© {currentYear} YouTube-Summarizer. All rights reserved.</p>
+
+        <div className='mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4'>
+          <p className='text-gray-500 text-xs'>© {currentYear} ProductReviewAI. All rights reserved.</p>
+          <div className='flex gap-6'>
+            <a href="#" className='text-gray-500 hover:text-white text-xs transition-colors'>Twitter</a>
+            <a href="#" className='text-gray-500 hover:text-white text-xs transition-colors'>LinkedIn</a>
+            <a href="#" className='text-gray-500 hover:text-white text-xs transition-colors'>GitHub</a>
+          </div>
         </div>
       </div>
     </footer>

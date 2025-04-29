@@ -24,10 +24,10 @@ const YouTube3DIcon = ({ size = 'medium' }: YouTube3DIconProps) => {
         <svg className="eyebrow right absolute w-5 h-5 right-[28%] top-[14%] transform scale-x-[-1] animate-browBlink" viewBox="0 0 20 20">
           <path d="M0,15 Q10,5 20,15" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
         </svg>
-        <div className="eye left absolute w-[15px] h-[15px] bg-gradient-radial from-white to-gray-300 rounded-full top-[30%] left-[30%] animate-blink shadow-inner" style={{
+        <div className="eye left absolute w-[15px] h-[15px] bg-white  rounded-full top-[30%] left-[30%] animate-blink shadow-inner" style={{
           boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.5)'
         }}></div>
-        <div className="eye right absolute w-[15px] h-[15px] bg-gradient-radial from-white to-gray-300 rounded-full top-[30%] right-[30%] animate-blink shadow-inner" style={{
+        <div className="eye right absolute w-[15px] h-[15px] bg-white rounded-full top-[30%] right-[30%] animate-blink shadow-inner" style={{
           boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.5)'
         }}></div>
         <div className="mouth absolute w-[40px] h-[20px] bg-white rounded-b-[40px] bottom-[20%] left-[50%] transform -translate-x-1/2 shadow-md" style={{

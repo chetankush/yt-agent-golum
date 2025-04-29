@@ -1,0 +1,307 @@
+
+# AI-Powered Product Comparison Platform .cursorrules File
+
+**App Summary**  
+AI-driven platform that summarizes YouTube product reviews and compares items across e-commerce platforms within user-defined budgets. Integrates AI analysis with real-time pricing data and authentication-protected user profiles.
+
+**Target Audience**  
+Technical consumers, deal hunters, and e-commerce businesses needing automated product research solutions.
+
+## Tech Stack Specification
+```
+{
+  "core": {
+    "frontend": "Next.js 15.1+ (App Router)",
+    "backend": "Node.js 20+",
+    "auth": "Clerk v5+",
+    "ai": {
+      "agents": "cursor-tools 3.2+",
+      "models": ["Gemini 2.0", "Perplexity API", "OpenRouter"],
+      "mcp": "Cloudflare Workers MCP"
+    },
+    "validation": "Schematiq 2.4+",
+    "database": "PostgreSQL 15+ (Vercel Postgres)",
+    "styling": {
+      "framework": "Tailwind CSS 3.4+",
+      "components": "shadcn/ui 0.6+",
+      "icons": "React Icons 5.3+"
+    }
+  }
+}
+```
+
+## Project Structure Rules
+```
+src/
+├── app/
+│   ├── (public)/           # Public routes
+│   ├── (auth)/             # Clerk authentication routes
+│   ├── (dashboard)/        # Authenticated user dashboard
+│   └── api/                # API routes
+├── components/
+│   ├── ai/                 # AI agent components
+│   ├── data/               # Data tables/charts
+│   └── ui/                 # shadcn/ui components
+├── lib/
+│   ├── ai/                 # AI integration logic
+│   ├── db/                 # Database client
+│   └── schemas/            # Schematiq validation
+├── styles/                 # Global CSS
+└── .cursor/                # Cursor config
+    ├── mcp.json            # MCP server config
+    └── rules/              # AI agent rules
+```
+
+## Development Standards
+```
+// 1. TypeScript Enforcement
+type StrictMode = {
+  noImplicitAny: true,
+  strictNullChecks: true,
+  exactOptionalPropertyTypes: true
+}
+
+// 2. Authentication Pattern
+import { auth } from '@clerk/nextjs/server';
+
+export async function protectedRoute() {
+  const { userId } = auth();
+  if (!userId) redirect('/sign-in');
+}
+```
+
+## AI Agent Configuration
+```
+// .cursor/mcp.json
+{
+  "mcpServers": {
+    "clerk-auth-mcp": {
+      "command": "npx",
+      "args": ["-y", "cursor-rules-mcp"],
+      "env": {
+        "CLERK_SECRET_KEY": "${process.env.CLERK_SECRET_KEY}",
+        "PERPLEXITY_API_KEY": "${process.env.PERPLEXITY_API_KEY}"
+      }
+    },
+    "product-comparison-agent": {
+      "command": "cursor-tools",
+      "args": ["agent", "--model=gemini-2.0"],
+      "context": {
+        "maxTokens": 128000,
+        "temperature": 0.2
+      }
+    }
+  }
+}
+```
+
+## Critical Implementation Rules
+1. **Authentication Security**
+   - Use Clerk's `auth()` for server-side protection
+   - Never expose API keys in client bundles
+   - Validate all user input with Schematiq:
+   ```
+   import { z } from 'schematiq';
+
+   const ProductSchema = z.object({
+     id: z.string().uuid(),
+     price: z.number().positive(),
+     features: z.array(z.string()).min(3)
+   });
+   ```
+
+2. **AI Integration Standards**
+   - Use cursor-tools for agent orchestration:
+   ```
+   npm install -g cursor-tools
+   cursor-tools install .
+   ```
+   - Implement MCP server for Claude Desktop integration
+   - Rate limit API calls to AI services
+
+3. **Performance Optimization**
+   - Use Next.js 15's partial prerendering
+   - Implement ISR for product pages:
+   ```
+   export async function generateStaticParams() {
+     return getTopProducts().map((product) => ({
+       id: product.id,
+     }));
+   }
+   ```
+   - Cache API responses with `unstable_cache`
+
+4. **Scalability Patterns**
+   - Use vertical slice architecture for features
+   - Implement Circuit Breaker for external APIs
+   - Use connection pooling for PostgreSQL
+   - Containerize with Docker:
+   ```
+   FROM node:20-alpine
+   WORKDIR /app
+   COPY package*.json ./
+   RUN pnpm install --frozen-lockfile
+   COPY . .
+   CMD ["pnpm", "dev"]
+   ```
+
+## UI Development Standards
+```
+// Product Comparison Table Component
+export function ComparisonTable({ products }) {
+  return (
+    
+      
+        
+          Feature
+          {products.map((product) => (
+            {product.name}
+          ))}
+        
+      
+      
+        {features.map((feature) => (
+          
+            {feature}
+            {products.map((product) => (
+              
+                {product.features.includes(feature) ? '✅' : '❌'}
+              
+            ))}
+          
+        ))}
+      
+    
+  );
+}
+```
+
+## Production Readiness Checklist
+1. Environment Variables
+```
+# .env.local
+CLERK_PUBLISHABLE_KEY=pk_...
+CLERK_SECRET_KEY=sk_...
+PERPLEXITY_API_KEY=pplx_...
+DATABASE_URL=postgres://...
+```
+
+2. Monitoring Setup
+```
+// package.json
+{
+  "scripts": {
+    "test:e2e": "cypress run",
+    "test:unit": "jest",
+    "lint": "next lint",
+    "security": "npm audit --production"
+  }
+}
+```
+
+3. CI/CD Pipeline
+```
+# .github/workflows/deploy.yml
+name: Production Deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - uses: Vercel/action@v3
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+```
+
+## Maintenance Guide
+1. Keep dependencies updated with:
+```
+pnpm dlx npm-check-updates -u
+```
+2. Use Sentry for error tracking:
+```
+import * as Sentry from '@sentry/nextjs';
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  tracesSampleRate: 0.1,
+});
+```
+3. Implement health checks:
+```
+// app/api/health/route.ts
+export async function GET() {
+  const dbStatus = await checkDatabase();
+  return Response.json({
+    status: dbStatus ? 'healthy' : 'degraded',
+    timestamp: new Date().toISOString()
+  });
+}
+```
+
+## Security Protocols
+1. Content Security Policy
+```
+// next.config.js
+const securityHeaders = [
+  {
+    key: 'Content-Security-Policy',
+    value: `default-src 'self'; script-src 'self' 'unsafe-eval' *.clerk.vercel.app;`
+  }
+];
+```
+2. Rate Limiting
+```
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(10, '10 s'),
+});
+```
+
+## AI Agent Prompt Engineering
+
+# .cursor/rules/ai-prompt.mdc
+When handling product comparison requests:
+
+1. First query YouTube API for recent review videos
+2. Summarize using Gemini 2.0 with key points extraction
+3. Cross-reference with Amazon/Flipkart reviews
+4. Apply budget filter
+5. Present results in table format with:
+   - Product name
+   - Key features
+   - Price comparison
+   - Aggregate rating
+   - Summary highlights
+
+
+Citations:
+[1] https://www.cursorrules.app
+[2] https://dev.to/ashinno/what-is-cursorrule-and-how-to-use-it-52gg
+[3] https://playbooks.com/mcp/sokratisvidros-clerk-authentication
+[4] https://www.npmjs.com/package/cursor-tools
+[5] https://huzzler.so/c/resources/comments/0n4tn4k/the-best-cursorrules-file-for-creating-apps-with-nextjs-with-cursor-agent-works-with-claude-37-sonnet
+[6] https://github.com/draeician/crules
+[7] https://dev.to/simplr_sh/my-cursorrules-configuration-for-typescriptnextjs-development-5ep7
+[8] https://www.getcursorrules.com/rules/typescript-nextjs-cursorrules-prompt-file
+[9] https://www.cursorrules.org/article/nextjs-app-router-cursorrules-prompt-file
+[10] https://playbooks.com/rules/nextjs
+[11] https://github.com/sanjeed5/awesome-cursor-rules-mdc/blob/main/rules-mdc/clerk.mdc
+[12] https://github.com/jfontestad/ai-awesome-cursorrules
+[13] https://cursor-ai.live/rule/nextjs-typescript-cursorrules-prompt-file/
+[14] https://clerk.com
+[15] https://dev.to/dpaluy/mastering-cursor-rules-a-developers-guide-to-smart-ai-integration-1k65
+[16] https://github.com/PatrickJS/awesome-cursorrules/blob/main/rules/nextjs-typescript-tailwind-cursorrules-prompt-file/README.md
+[17] https://www.instructa.ai/en/ai-prompts/clerk-svelte-standards
+[18] https://github.com/eastlondoner/cursor-tools
+[19] https://cursorrule.com/posts/nextjs-react-typescript-cursor-rules
+[20] https://x.com/RayFernando1337/status/1860879692871705070
