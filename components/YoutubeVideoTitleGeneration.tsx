@@ -9,6 +9,7 @@ const YoutubeVideoTitleGeneration = ({ videoId }: { videoId: string }) => {
     return null;
   }
 
+  console.log( videoId)
   return (
     <div className='rounded-xl flex flex-col p-4 border border-gray-200'>
       <div className="min-w-52">

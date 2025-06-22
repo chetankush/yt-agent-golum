@@ -18,6 +18,8 @@ const YoutubeVideoTranscript = ({ videoId }: { videoId: string }) => {
   
   const { user } = useUser();
   
+  console.log(setTranscript)
+  console.log(user, videoId)
 
 
   return (
@@ -32,7 +34,7 @@ const YoutubeVideoTranscript = ({ videoId }: { videoId: string }) => {
           </div>
         ) : (
           <div className="flex flex-col gap-4 max-h-96 overflow-y-auto pr-4 custom-scrollbar">
-            {transcript?.transcript ? (
+            {transcript ? (
               transcript.transcript.map((entry, index) => (
                 <div key={index} className="bg-gray-800/40 rounded-lg p-4 backdrop-blur-sm border border-gray-700/30">
                   <div className="text-gray-400 text-xs mb-2 font-medium">

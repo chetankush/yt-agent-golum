@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { ChannelDetails, VideoDetails } from "../types/types";
+import { VideoDetails } from "../types/types";
 import { getVideoDetails } from "../actions/getVideoDetails";
 import Image from "next/image";
 import { Calendar, View, Heart, MessageCircle } from "lucide-react";

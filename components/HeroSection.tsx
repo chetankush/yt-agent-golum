@@ -6,7 +6,7 @@ import {
   ShoppingBag, 
   Clock
 } from 'lucide-react'
-import AnimatedSearchBar from './AnimatedSearchBar'
+// import AnimatedSearchBar from './AnimatedSearchBar'
 import YoutubeVideoForm from './YoutubeVideoForm'
 
 const HeroSection = () => {

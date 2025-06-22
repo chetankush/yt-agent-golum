@@ -3,7 +3,8 @@ import React from 'react'
 import YouTube3DIcon from './YouTube3DIcon'
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
-import { ShoppingCart, Menu } from 'lucide-react'
+import { Menu } from 'lucide-react'
+// import { ShoppingCart, Menu } from 'lucide-react'
 
 const Header = () => {
     return (

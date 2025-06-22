@@ -4,6 +4,7 @@ import "./globals.css";
 import ClientWrapper from "../../components/ClientWrapper";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { DevTools } from '@/components/DevTools';
 // import HeroSection from "../../components/HeroSection";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
 
           <Footer/>
         </ClientWrapper>
+        <DevTools />
       </body>
     </html>
   );

@@ -8,6 +8,7 @@ import YoutubeVideoDetails from '../../../../../components/YoutubeVideoDetails'
 import YoutubeVideoTranscript from '../../../../../components/YoutubeVideoTranscript'
 import YoutubeVideoTitleGeneration from '../../../../../components/YoutubeVideoTitleGeneration'
 import YoutubeVideoThumbnail from '../../../../../components/YoutubeVideoThumbnail'
+import AiAgentChat from '../../../../../components/AiAgentChat'
 const AnalysisPage = () => {
     const params = useParams<{videoId: string}>();    
 
@@ -47,10 +48,8 @@ const AnalysisPage = () => {
         </div>
 
        <div className='order-1 lg:order-2 lg:sticky lg:top-20 h-[500px] md:h-[calc(100vh-6rem)]'>
-       <p> right side</p>
-       {/* ai agent chat section */}
-       {/* ai agent chat input */}
-       {/* ai agent chat messages */}
+
+       <AiAgentChat videoId={videoId}/>
        </div>
         </div>
     </div>

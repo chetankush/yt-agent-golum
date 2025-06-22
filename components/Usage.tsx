@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+
 import { FeatureFlags } from "../features/flags"
 import { Progress } from "../src/components/ui/progress"
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useSchematicEntitlement, useSchematicIsPending } from "@schematichq/schematic-react"
 export default function Usage(
     {
@@ -13,7 +14,7 @@ export default function Usage(
         title: string
     }) {
 
-    const isPending = useSchematicIsPending();
+    // const isPending = useSchematicIsPending();
 
     const { featureAllocation,
         featureUsage,
